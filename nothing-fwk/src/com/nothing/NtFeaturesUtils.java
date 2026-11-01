@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The LineageOS Project
+ * Copyright (C) 2024-2026 The LineageOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -13,27 +13,53 @@ import java.util.BitSet;
 
 public class NtFeaturesUtils {
 
-    private static final BitSet sFeatures;
+    // Read by name through reflection in Nothing Camera
+    public static final int NTF_QCOM = 59;
+    public static final int NTF_MTK = 60;
+    public static final int NTF_PONG = 62;
+    public static final int NTF_PACMAN = 63;
+    public static final int NTF_TETRIS = 64;
+    public static final int NTF_ASTEROIDS = 80;
+    public static final int NTF_ASTEROIDS_PLUS = 86;
+    public static final int NTF_JPN = 89;
+    public static final int NTF_DRAGONITE = 110;
+    public static final int NTF_BACKGROUND_RES_LIMIT = 115;
+
+    private static final int MAX_FEATURES = 160;
+
+    private static final BitSet sFeatures = new BitSet(MAX_FEATURES);
 
     static {
-        final String fullProp = SystemProperties.get("ro.vendor.nothing.feature.base", "0");
-        final String productDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.product." + Build.PRODUCT, "0");
-        final String deviceDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.device." + Build.DEVICE, "0");
-        final String plusDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.plus." + Build.DEVICE, "0");
-
-        int bitsetSize = maxLength(replace(fullProp),replace(productDiffProp),replace(deviceDiffProp)) * 4;
-
-        sFeatures = new BitSet(bitsetSize);
+        final String fullProp = getFeatureProp("base");
+        final String productDiffProp = getFeatureProp("diff.product." + Build.PRODUCT);
+        String deviceDiffProp = getFeatureProp("diff.device." + Build.DEVICE);
+        if ("0".equals(deviceDiffProp)) {
+            deviceDiffProp = getFeatureProp("diff.device.Asteroids");
+        }
+        String plusDiffProp = getFeatureProp("diff.plus." + Build.DEVICE);
+        if ("0".equals(plusDiffProp)) {
+            plusDiffProp = getFeatureProp("diff.plus.Asteroids");
+        }
+        final String cmfDiffProp = getFeatureProp("diff.os.cmf");
+        final String configCustomProp = SystemProperties.get("persist.sys.config.custom", "0");
+        final String customProp = SystemProperties.get("persist.custom", "0");
 
         base(new BigInteger(replace(fullProp), 16));
         change(new BigInteger(replace(productDiffProp), 16));
         change(new BigInteger(replace(deviceDiffProp), 16));
-        setPro(plusDiffProp);
+        change(new BigInteger(replace(configCustomProp), 16));
+        if ("pro".equalsIgnoreCase(SystemProperties.get("ro.boot.pbid", "base"))) {
+            change(new BigInteger(replace(plusDiffProp), 16));
+        }
+        if ("true".equalsIgnoreCase(SystemProperties.get("ro.product.os.cmf", "false"))) {
+            change(new BigInteger(replace(cmfDiffProp), 16));
+        }
+        change(new BigInteger(replace(customProp), 16));
     }
 
     public static boolean isSupport(int... features) {
         for (int feature : features) {
-            if (feature < 0 || feature >= sFeatures.length()) {
+            if (feature < 0 || feature >= MAX_FEATURES) {
                 return false;
             }
             if (!sFeatures.get(feature)) {
@@ -43,48 +69,34 @@ public class NtFeaturesUtils {
         return true;
     }
 
-    private static void base(BigInteger bi) {
-        int index = 0;
-        while (!bi.equals(BigInteger.ZERO)) {
-            if (bi.testBit(0)) {
-                sFeatures.set(index);
+    private static void base(BigInteger feature) {
+        for (int i = 0; i < feature.bitLength(); i++) {
+            if (feature.testBit(i)) {
+                sFeatures.set(i);
             }
-            index++;
-            bi = bi.shiftRight(1);
         }
     }
 
-    private static void change(BigInteger bi) {
-        int index = 0;
-        while (!bi.equals(BigInteger.ZERO)) {
-            if (bi.testBit(0)) {
-                sFeatures.flip(index);
+    private static void change(BigInteger feature) {
+        for (int i = 0; i < feature.bitLength(); i++) {
+            if (feature.testBit(i)) {
+                sFeatures.flip(i);
             }
-            index++;
-            bi = bi.shiftRight(1);
         }
     }
 
     private static String replace(String str) {
-        if (str == null) {
-            return "";
+        if (str == null || str.isEmpty()) {
+            return "0";
         }
         return str.replace("0x", "").replace("L", "");
     }
 
-    private static void setPro(String str) {
-        if ("pro".equalsIgnoreCase(SystemProperties.get("ro.boot.pbid", "base"))) {
-            change(new BigInteger(replace(str), 16));
+    private static String getFeatureProp(String suffix) {
+        String prop = SystemProperties.get("ro.build.nothing.feature." + suffix, "");
+        if (prop.isEmpty() || "0".equals(prop)) {
+            prop = SystemProperties.get("ro.vendor.nothing.feature." + suffix, "0");
         }
-    }
-
-    private static int maxLength(String... strs) {
-        int max = 0;
-        for (String s : strs) {
-            if (s.length() > max) {
-                max = s.length();
-            }
-        }
-        return max;
+        return prop;
     }
 }

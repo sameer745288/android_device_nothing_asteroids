@@ -313,7 +313,7 @@ odm/overlayfs_origin/pro/etc/camera/camxoverridesettings.txt
 system_ext/etc/permissions/advancedSample_camera_extensions.xml
 system_ext/framework/androidx.camera.extensions.impl.advanced.jar;MAKE_COPY_RULE_ONLY
 system_ext/lib64/libencoderjpeg_jni.so
-vendor/bin/hw/vendor.qti.camera.provider-service_64
+vendor/bin/hw/vendor.qti.camera.provider-service_64;DISABLE_CHECKELF
 vendor/etc/camera/ancsat/sat_mecp.bin
 vendor/etc/camera/ancsat/sat_mecp_plus.bin
 vendor/etc/camera/basic_param.bin
@@ -794,6 +794,7 @@ vendor/lib64/libwa_sat.so
 vendor/lib64/vendor.qti.hardware.camera.aon-service-impl.so
 vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so
 vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so
+vendor/lib64/vendor.qti.hardware.camera.postproc@1.0.so:vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-nothing.so
 
 # Charging
 vendor/bin/hw/vendor.noth.hardware.charge-service
@@ -903,7 +904,7 @@ vendor/lib64/vendor.qti.diaghal@1.0.so;MODULE_SUFFIX=_vendor
 # Display
 vendor/bin/feature_enabler_client
 vendor/bin/hw/vendor.qti.hardware.display.color-service
-vendor/bin/hw/vendor.qti.hardware.lights.service
+vendor/bin/hw/vendor.qti.hardware.lights.service;DISABLE_CHECKELF
 vendor/bin/ppd
 vendor/bin/qdcmss
 vendor/etc/clstc_config_library.xml

@@ -1,1 +1,2 @@
 get_prop(platform_app, vendor_nothing_feature_prop)
+get_prop(platform_app_36, vendor_nothing_feature_prop)

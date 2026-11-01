@@ -27,8 +27,10 @@ on post-fs-data
     chmod 0444 /data/vendor/camera/bokeh_caldata_tele_golden.bin
     chown cameraserver audio /data/vendor/camera/bokeh_caldata_tele_golden.bin
 
-    symlink /mnt/vendor/persist/sensors/registry/registry/volcano_qrd_ois_manager_0.json.ois_manager_0_platform.ois.fac_cal.bias /data/vendor/camera/ois_gyro_offset
+    rm /data/vendor/camera/ois_gyro_offset
+    copy /mnt/vendor/persist/sensors/registry/registry/volcano_qrd_ois_manager_0.json.ois_manager_0_platform.ois.fac_cal.bias /data/vendor/camera/ois_gyro_offset
     chown cameraserver audio /data/vendor/camera/ois_gyro_offset
+    chmod 0664 /data/vendor/camera/ois_gyro_offset
 
     setprop ro.media.xml_variant.profiles "_volcano_v1_${ro.boot.pbid}"
 

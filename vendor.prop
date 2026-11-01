@@ -188,3 +188,8 @@ vendor.vibrator.device=/dev/aac_richtap
 # Wi-Fi
 wifi.aware.interface=wifi-aware0
 
+# Nothing features
+ro.vendor.nothing.feature.base=0xe24800001004458438124a040106b4247b97ffL
+ro.vendor.nothing.feature.diff.device.Asteroids=0x241001a38fc01acc038d140ad44002d0842080L
+ro.vendor.nothing.feature.diff.plus.Asteroids=0x4000000000000000000000L
+

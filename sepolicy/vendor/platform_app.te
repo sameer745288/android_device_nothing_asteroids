@@ -1,1 +1,14 @@
 allow platform_app vendor_sysfs_graphics:file r_file_perms;
+allow platform_app_36 vendor_sysfs_graphics:file r_file_perms;
+
+hal_client_domain(platform_app_36, vendor_hal_perf)
+hal_client_domain(platform_app_36, vendor_hal_cvp)
+hal_client_domain(platform_app_36, vendor_hal_scve)
+hal_client_domain(platform_app_36, vendor_hal_qspmhal)
+hal_client_domain(platform_app_36, hal_fingerprint)
+hal_client_domain(platform_app_36, vendor_hal_pasrmanager)
+get_prop(platform_app_36, vendor_mpctl_prop)
+get_prop(platform_app_36, vendor_display_notch_prop)
+allow platform_app_36 nfc_service:service_manager find;
+get_prop(platform_app, vendor_nothing_feature_prop)
+get_prop(platform_app_36, vendor_nothing_feature_prop)
