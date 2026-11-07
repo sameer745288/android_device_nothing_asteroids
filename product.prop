@@ -31,3 +31,7 @@ remote_provisioning.hostname=remoteprovisioning.googleapis.com
 
 # Thermal
 persist.sys.sltntc.enable=1
+
+# Display
+ro.surface_flinger.enable_sdr_dimming=true
+
