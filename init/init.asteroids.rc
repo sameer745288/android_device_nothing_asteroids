@@ -90,6 +90,7 @@ on property:sys.touch.pocket_mode=*
 on property:vendor.all.modules.ready=1
     chown system system /proc/touchpanel/fod_mode
     chown system system /sys/panel_feature/fp_status
+    chmod 0660 /sys/panel_feature/fp_status
 
     start asteroids_nfc_detect
 
