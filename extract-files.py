@@ -148,6 +148,14 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.media.audio.common.types-V4-cpp.so', 'android.media.audio.common.types-V5-cpp.so'),
     'vendor/lib64/hw/libproviderextension.so' :blob_fixup()
         .replace_needed('android.hardware.graphics.allocator-V2-ndk.so','android.hardware.graphics.allocator-V1-ndk.so'),
+    'vendor/etc/camera/decision.json': blob_fixup()
+        .regex_replace(r'"feature\.camera\.day\.hdr\.zoom\.range":\s*"\[0\.6,8\.0\)"', '"feature.camera.day.hdr.zoom.range":""')
+        .regex_replace(r'"feature\.camera\.night\.sn\.zoom\.range":\s*"\[0\.6,4\.0\)"', '"feature.camera.night.sn.zoom.range":""'),
+    'vendor/etc/camera/decision_pro.json': blob_fixup()
+        .regex_replace(r'"feature\.camera\.day\.hdr\.zoom\.range":\s*"\[0\.6,12\.0\)"', '"feature.camera.day.hdr.zoom.range":""')
+        .regex_replace(r'"feature\.camera\.night\.sn\.zoom\.range":\s*"\[0\.6,6\.0\)"', '"feature.camera.night.sn.zoom.range":""'),
+    'vendor/etc/camera/ntcamoverridesettings.txt': blob_fixup()
+        .regex_replace(r'EnableReuqestLIFO=1', 'EnableReuqestLIFO=0'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
