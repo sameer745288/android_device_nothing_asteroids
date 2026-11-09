@@ -84,6 +84,52 @@ on property:sys.boot_completed=1
     chown system system /proc/charger/nt_otg_enable
     chmod 0664 /proc/charger/nt_otg_enable
 
+    # Configure WALT governor down-rate delay and scheduler tunables
+    write /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/policy0/walt/up_rate_limit_us 0
+    write /sys/devices/system/cpu/cpufreq/policy4/walt/up_rate_limit_us 0
+    write /sys/devices/system/cpu/cpufreq/policy7/walt/up_rate_limit_us 0
+    write /proc/sys/walt/sched_upmigrate "75 98"
+    write /proc/sys/walt/sched_downmigrate "68 88"
+    write /proc/sys/walt/sched_group_upmigrate 100
+    write /proc/sys/walt/sched_group_downmigrate 85
+    write /proc/sys/walt/sched_conservative_pl 1
+    write /proc/sys/walt/sched_walt_rotate_big_tasks 1
+    write /proc/sys/kernel/sched_util_clamp_min_rt_default 0
+    write /proc/sys/walt/input_boost/input_boost_freq "1113600 0 0 0 0 0 0 0"
+    write /proc/sys/walt/input_boost/input_boost_ms 120
+
+    # Memory and power management tunables (aligned with Nothing OS post-boot)
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/compaction_proactiveness 0
+    write /proc/sys/vm/page-cluster 0
+    write /sys/kernel/mm/transparent_hugepage/enabled always
+    write /sys/kernel/mm/transparent_hugepage/defrag never
+    write /sys/kernel/mm/transparent_hugepage/khugepaged/defrag 0
+    write /sys/kernel/mm/transparent_hugepage/khugepaged/pages_to_scan 1
+    write /sys/kernel/mm/transparent_hugepage/khugepaged/scan_sleep_millisecs 4294967295
+    write /sys/kernel/mm/transparent_hugepage/khugepaged/alloc_sleep_millisecs 4294967295
+
+on property:vendor.post_boot.parsed=1
+    # Re-apply WALT governor down-rate delay and scheduler tunables after vendor post-boot script finishes
+    write /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/policy0/walt/up_rate_limit_us 0
+    write /sys/devices/system/cpu/cpufreq/policy4/walt/up_rate_limit_us 0
+    write /sys/devices/system/cpu/cpufreq/policy7/walt/up_rate_limit_us 0
+    write /proc/sys/walt/sched_upmigrate "75 98"
+    write /proc/sys/walt/sched_downmigrate "68 88"
+    write /proc/sys/walt/sched_group_upmigrate 100
+    write /proc/sys/walt/sched_group_downmigrate 85
+    write /proc/sys/walt/sched_conservative_pl 1
+    write /proc/sys/walt/sched_walt_rotate_big_tasks 1
+    write /proc/sys/kernel/sched_util_clamp_min_rt_default 0
+    write /proc/sys/walt/input_boost/input_boost_freq "1113600 0 0 0 0 0 0 0"
+    write /proc/sys/walt/input_boost/input_boost_ms 120
+
 on property:sys.touch.pocket_mode=*
     write /proc/touchpanel/pocket_mode ${sys.touch.pocket_mode}
 
