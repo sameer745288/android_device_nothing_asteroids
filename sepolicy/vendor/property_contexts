@@ -1,6 +1,14 @@
+# Bluetooth
+persist.vendor.bt.                     u:object_r:vendor_bluetooth_prop:s0
+
+# Camera
+vendor.camera.ncf.                     u:object_r:vendor_camera_prop:s0
+
 # Fingerprint
 persist.vendor.overlay.fp_model     u:object_r:vendor_fingerprint_prop:s0
 persist.vendor.overlay.fp_vendor    u:object_r:vendor_fingerprint_prop:s0
+persist.vendor.fingerprint.         u:object_r:vendor_fingerprint_prop:s0
+ro.vendor.fingerprint.              u:object_r:vendor_fingerprint_prop:s0
 
 # NFC
 persist.vendor.nfc.config_file_name    u:object_r:vendor_persist_nfc_prop:s0
