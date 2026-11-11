@@ -9,6 +9,9 @@ $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
+# Sony Dolby Atmos
+$(call inherit-product, hardware/dolby/dolby.mk)
+
 PRODUCT_RO_FILE_SYSTEM ?= ext4
 
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -451,8 +454,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/lineage/interfaces/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client \
     kernel/nothing/sm7635 \
-    packages/apps/ParanoidGlyph \
-    packages/apps/GlyphAdapter
+    hardware/nothing/packages/ParanoidGlyph \
+    hardware/nothing/packages/GlyphAdapter
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
