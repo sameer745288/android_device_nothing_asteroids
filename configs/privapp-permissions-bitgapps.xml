@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <privapp-permissions package="com.google.android.gms">
+        <deny-permission name="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS" />
+    </privapp-permissions>
+
+    <privapp-permissions package="com.google.android.apps.restore">
+        <deny-permission name="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS" />
+    </privapp-permissions>
+</permissions>

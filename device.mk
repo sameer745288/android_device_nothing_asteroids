@@ -550,3 +550,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
+
+# BiTGApps: explicitly deny eSIM provisioning permissions.
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/privapp-permissions-bitgapps.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-bitgapps.xml
