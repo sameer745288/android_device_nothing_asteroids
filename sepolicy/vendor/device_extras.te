@@ -1,2 +1,2 @@
-allow device_extras vendor_proc_power_supply:file rw_file_perms;
-allow device_extras vendor_proc_power_supply:dir r_dir_perms;
+allow device_extras_visible_type vendor_proc_power_supply:file rw_file_perms;
+allow device_extras_visible_type vendor_proc_power_supply:dir r_dir_perms;
