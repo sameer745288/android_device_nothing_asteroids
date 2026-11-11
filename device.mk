@@ -155,6 +155,7 @@ PRODUCT_PACKAGES += \
 
 # Device Extras
 PRODUCT_PACKAGES += \
+    AssistKey \
     DeviceExtras
 
 # Display
