@@ -6,6 +6,12 @@
 # Google apps — BiTGApps Core Android 17
 $(call inherit-product, vendor/bitgapps/bitgapps.mk)
 
+# PixelOS Lockscreen Clocks
+$(call inherit-product, vendor/pixel/clocks/common/common-vendor.mk)
+
+PRODUCT_PACKAGES += \
+    SystemUIResPixelClocks
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
