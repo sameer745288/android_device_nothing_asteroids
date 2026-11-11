@@ -342,4 +342,6 @@
 
      <!-- The amount to scale fullscreen snapshots for Overview and snapshot starting windows. -->
      <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.7</item>
+    <!-- Keep display autosuspend coupled to display state -->
+    <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">false</bool>
 </resources>
