@@ -5,3 +5,6 @@ set_prop(vendor_init, vendor_nfc_prop)
 
 # Allow vendor init to load fingerprint properties from vendor/build.prop.
 set_prop(vendor_init, vendor_fingerprint_prop)
+
+# Allow vendor init to apply WALT scheduler tuning.
+allow vendor_init proc_sched_walt:file write;
