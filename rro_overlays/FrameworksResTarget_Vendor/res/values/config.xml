@@ -41,6 +41,10 @@
          on the headphone/microphone jack. When false use the older uevent framework. -->
     <bool name="config_useDevInputEventForAudioJack">true</bool>
 
+    <!-- Boolean indicating whether the wifi chipset has dual frequency band support (2.4GHz & 5GHz)
+    in Soft AP mode. Set to false to avoid thermal throttling on Asteroids hardware. -->
+    <bool name="config_wifi_dual_sap_mode_enabled">false</bool>
+
     <!-- A string config in svg path format for the main display shape.
          (@see https://www.w3.org/TR/SVG/paths.html#PathData).
 

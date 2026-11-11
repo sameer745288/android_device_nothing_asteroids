@@ -27,4 +27,7 @@
 
     <!-- The radius of the enrollment progress bar, in DP. -->
     <integer name="config_udfpsEnrollProgressBar" translatable="false">92</integer>
+
+    <!-- Fast charging threshold (14.9W in micro-watts) -->
+    <integer name="config_chargingFastThreshold">14900000</integer>
 </resources>

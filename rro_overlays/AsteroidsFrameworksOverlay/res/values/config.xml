@@ -344,4 +344,37 @@
      <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.7</item>
     <!-- Keep display autosuspend coupled to display state -->
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">false</bool>
+
+    <!-- Fast charging threshold (14.9W in micro-watts) -->
+    <integer name="config_chargingFastThreshold">14900000</integer>
+
+    <!-- Screen brightness in doze state -->
+    <integer name="config_screenBrightnessDoze">17</integer>
+
+    <!-- Doze immediately upon screen off -->
+    <bool name="config_dozeAfterScreenOff">true</bool>
+
+    <!-- Support long press power button when non-interactive -->
+    <bool name="config_supportLongPressPowerWhenNonInteractive">true</bool>
+
+    <!-- Disable dreams by default to avoid keeping the CPU awake and heating up during charging -->
+    <bool name="config_dreamsEnabledByDefault">false</bool>
+
+    <!-- Disable dual SoftAP concurrent mode to prevent RF chip thermal throttling -->
+    <bool name="config_wifi_dual_sap_mode_enabled">false</bool>
+
+    <!-- Hardware support for batched Wi-Fi scan results -->
+    <bool name="config_wifi_batched_scan_supported">true</bool>
+
+    <!-- Device idle (Doze): exponential light doze backoff -->
+    <bool name="device_idle_light_idle_increase_linearly">false</bool>
+
+    <!-- Device idle (Doze) timeouts aligned with stock Nothing OS for aggressive sleep entry -->
+    <integer name="device_idle_light_max_idle_to_ms">900000</integer>
+    <integer name="device_idle_inactive_to_ms">15000</integer>
+    <integer name="device_idle_idle_after_inactive_to_ms">15000</integer>
+    <integer name="device_idle_sensing_to_ms">15000</integer>
+    <integer name="device_idle_locating_to_ms">15000</integer>
+    <integer name="device_idle_motion_inactive_to_ms">30000</integer>
+    <integer name="device_idle_idle_to_ms">3600000</integer>
 </resources>
