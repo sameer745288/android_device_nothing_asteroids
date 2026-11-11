@@ -1,1 +1,10 @@
 r_dir_file(vendor_hal_perf_default, system_server)
+# Allow Qualcomm Performance HAL to access WALT scheduler controls
+allow vendor_hal_perf_default proc_sched_walt:dir search;
+
+allow vendor_hal_perf_default proc_sched_walt:file {
+    getattr
+    open
+    read
+    write
+};
